@@ -1,0 +1,28 @@
+﻿@model Evento.Publicacao
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Cancelar</h2>
+
+<h3 style="color:red">Deseja cancelar isto?</h3>
+<fieldset>
+    <legend>Publicacao</legend>
+
+    <div class="display-label"><b>Data Publicacao</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.dataPublicacao)
+    </div>
+
+    <div class="display-label"><b>Evento</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Evento.titulo)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Cancelar" /> |
+        @Html.ActionLink("Voltar", "Index")
+    </p>
+}

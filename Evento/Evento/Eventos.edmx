@@ -1,0 +1,520 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EventosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descricao" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Evento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="titulo" Type="varchar" MaxLength="50" />
+          <Property Name="idTipoEvento" Type="int" />
+          <Property Name="descricao" Type="varchar(max)" />
+          <Property Name="local" Type="varchar" MaxLength="50" />
+          <Property Name="agenda" Type="varchar(max)" />
+          <Property Name="idEstado" Type="int" />
+        </EntityType>
+        <EntityType Name="GrauAcademico">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descricao" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Participante">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idTipoParticipante" Type="int" />
+          <Property Name="nome" Type="varchar" MaxLength="50" />
+          <Property Name="apelido" Type="varchar" MaxLength="50" />
+          <Property Name="idGrau" Type="int" />
+          <Property Name="empresa" Type="varchar" MaxLength="50" />
+          <Property Name="dataNascimento" Type="date" />
+          <Property Name="sexo" Type="int" />
+          <Property Name="tel" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="idEvento" Type="int" />
+        </EntityType>
+        <EntityType Name="Publicacao">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dataPublicacao" Type="datetime" />
+          <Property Name="idEvento" Type="int" />
+        </EntityType>
+        <EntityType Name="Sexo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descricao" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TipoEvento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descricao" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TipoParticipante">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descricao" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Evento_Estado">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
+          <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Evento">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evento_TipoEvento">
+          <End Role="TipoEvento" Type="Self.TipoEvento" Multiplicity="0..1" />
+          <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoEvento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Evento">
+              <PropertyRef Name="idTipoEvento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participante_Evento">
+          <End Role="Evento" Type="Self.Evento" Multiplicity="0..1" />
+          <End Role="Participante" Type="Self.Participante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Participante">
+              <PropertyRef Name="idEvento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participante_GrauAcademico">
+          <End Role="GrauAcademico" Type="Self.GrauAcademico" Multiplicity="0..1" />
+          <End Role="Participante" Type="Self.Participante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrauAcademico">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Participante">
+              <PropertyRef Name="idGrau" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participante_Sexo">
+          <End Role="Sexo" Type="Self.Sexo" Multiplicity="0..1" />
+          <End Role="Participante" Type="Self.Participante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sexo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Participante">
+              <PropertyRef Name="sexo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participante_TipoParticipante">
+          <End Role="TipoParticipante" Type="Self.TipoParticipante" Multiplicity="0..1" />
+          <End Role="Participante" Type="Self.Participante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoParticipante">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Participante">
+              <PropertyRef Name="idTipoParticipante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Publicacao_Evento">
+          <End Role="Evento" Type="Self.Evento" Multiplicity="0..1" />
+          <End Role="Publicacao" Type="Self.Publicacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Publicacao">
+              <PropertyRef Name="idEvento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EventosModelStoreContainer">
+          <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Evento" EntityType="Self.Evento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GrauAcademico" EntityType="Self.GrauAcademico" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Participante" EntityType="Self.Participante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Publicacao" EntityType="Self.Publicacao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sexo" EntityType="Self.Sexo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoEvento" EntityType="Self.TipoEvento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoParticipante" EntityType="Self.TipoParticipante" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Evento_Estado" Association="Self.FK_Evento_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Evento" EntitySet="Evento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evento_TipoEvento" Association="Self.FK_Evento_TipoEvento">
+            <End Role="TipoEvento" EntitySet="TipoEvento" />
+            <End Role="Evento" EntitySet="Evento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participante_Evento" Association="Self.FK_Participante_Evento">
+            <End Role="Evento" EntitySet="Evento" />
+            <End Role="Participante" EntitySet="Participante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participante_GrauAcademico" Association="Self.FK_Participante_GrauAcademico">
+            <End Role="GrauAcademico" EntitySet="GrauAcademico" />
+            <End Role="Participante" EntitySet="Participante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participante_Sexo" Association="Self.FK_Participante_Sexo">
+            <End Role="Sexo" EntitySet="Sexo" />
+            <End Role="Participante" EntitySet="Participante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participante_TipoParticipante" Association="Self.FK_Participante_TipoParticipante">
+            <End Role="TipoParticipante" EntitySet="TipoParticipante" />
+            <End Role="Participante" EntitySet="Participante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Publicacao_Evento" Association="Self.FK_Publicacao_Evento">
+            <End Role="Evento" EntitySet="Evento" />
+            <End Role="Publicacao" EntitySet="Publicacao" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EventosModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EventosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Participantes" EntityType="EventosModel.Participante" />
+          <EntitySet Name="Estadoes" EntityType="EventosModel.Estado" />
+          <EntitySet Name="Eventoes" EntityType="EventosModel.Evento" />
+          <EntitySet Name="GrauAcademicoes" EntityType="EventosModel.GrauAcademico" />
+          <EntitySet Name="Publicacaos" EntityType="EventosModel.Publicacao" />
+          <EntitySet Name="Sexoes" EntityType="EventosModel.Sexo" />
+          <EntitySet Name="TipoEventoes" EntityType="EventosModel.TipoEvento" />
+          <EntitySet Name="TipoParticipantes" EntityType="EventosModel.TipoParticipante" />
+          <AssociationSet Name="FK_Evento_Estado" Association="EventosModel.FK_Evento_Estado">
+            <End Role="Estado" EntitySet="Estadoes" />
+            <End Role="Evento" EntitySet="Eventoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evento_TipoEvento" Association="EventosModel.FK_Evento_TipoEvento">
+            <End Role="TipoEvento" EntitySet="TipoEventoes" />
+            <End Role="Evento" EntitySet="Eventoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participante_Evento" Association="EventosModel.FK_Participante_Evento">
+            <End Role="Evento" EntitySet="Eventoes" />
+            <End Role="Participante" EntitySet="Participantes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Publicacao_Evento" Association="EventosModel.FK_Publicacao_Evento">
+            <End Role="Evento" EntitySet="Eventoes" />
+            <End Role="Publicacao" EntitySet="Publicacaos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participante_GrauAcademico" Association="EventosModel.FK_Participante_GrauAcademico">
+            <End Role="GrauAcademico" EntitySet="GrauAcademicoes" />
+            <End Role="Participante" EntitySet="Participantes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participante_Sexo" Association="EventosModel.FK_Participante_Sexo">
+            <End Role="Sexo" EntitySet="Sexoes" />
+            <End Role="Participante" EntitySet="Participantes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participante_TipoParticipante" Association="EventosModel.FK_Participante_TipoParticipante">
+            <End Role="TipoParticipante" EntitySet="TipoParticipantes" />
+            <End Role="Participante" EntitySet="Participantes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Participante">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTipoParticipante" Type="Int32" />
+          <Property Name="nome" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="apelido" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="idGrau" Type="Int32" />
+          <Property Name="empresa" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="dataNascimento" Type="DateTime" Precision="0" />
+          <Property Name="sexo" Type="Int32" />
+          <Property Name="tel" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="email" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Type="Int32" Name="idEvento" />
+          <NavigationProperty Name="Evento" Relationship="EventosModel.FK_Participante_Evento" FromRole="Participante" ToRole="Evento" />
+          <NavigationProperty Name="GrauAcademico" Relationship="EventosModel.FK_Participante_GrauAcademico" FromRole="Participante" ToRole="GrauAcademico" />
+          <NavigationProperty Name="Sexo1" Relationship="EventosModel.FK_Participante_Sexo" FromRole="Participante" ToRole="Sexo" />
+          <NavigationProperty Name="TipoParticipante" Relationship="EventosModel.FK_Participante_TipoParticipante" FromRole="Participante" ToRole="TipoParticipante" />
+        </EntityType>
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="descricao" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Eventoes" Relationship="EventosModel.FK_Evento_Estado" FromRole="Estado" ToRole="Evento" />
+        </EntityType>
+        <EntityType Name="Evento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="titulo" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="idTipoEvento" />
+          <Property Type="String" Name="descricao" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="local" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="agenda" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="idEstado" />
+          <NavigationProperty Name="Estado" Relationship="EventosModel.FK_Evento_Estado" FromRole="Evento" ToRole="Estado" />
+          <NavigationProperty Name="TipoEvento" Relationship="EventosModel.FK_Evento_TipoEvento" FromRole="Evento" ToRole="TipoEvento" />
+          <NavigationProperty Name="Participantes" Relationship="EventosModel.FK_Participante_Evento" FromRole="Evento" ToRole="Participante" />
+          <NavigationProperty Name="Publicacaos" Relationship="EventosModel.FK_Publicacao_Evento" FromRole="Evento" ToRole="Publicacao" />
+        </EntityType>
+        <EntityType Name="GrauAcademico">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="descricao" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Participantes" Relationship="EventosModel.FK_Participante_GrauAcademico" FromRole="GrauAcademico" ToRole="Participante" />
+        </EntityType>
+        <EntityType Name="Publicacao">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="dataPublicacao" Precision="3" />
+          <Property Type="Int32" Name="idEvento" />
+          <NavigationProperty Name="Evento" Relationship="EventosModel.FK_Publicacao_Evento" FromRole="Publicacao" ToRole="Evento" />
+        </EntityType>
+        <EntityType Name="Sexo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="descricao" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Participantes" Relationship="EventosModel.FK_Participante_Sexo" FromRole="Sexo" ToRole="Participante" />
+        </EntityType>
+        <EntityType Name="TipoEvento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="descricao" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Eventoes" Relationship="EventosModel.FK_Evento_TipoEvento" FromRole="TipoEvento" ToRole="Evento" />
+        </EntityType>
+        <EntityType Name="TipoParticipante">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="descricao" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Participantes" Relationship="EventosModel.FK_Participante_TipoParticipante" FromRole="TipoParticipante" ToRole="Participante" />
+        </EntityType>
+        <Association Name="FK_Evento_Estado">
+          <End Type="EventosModel.Estado" Role="Estado" Multiplicity="0..1" />
+          <End Type="EventosModel.Evento" Role="Evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Evento">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evento_TipoEvento">
+          <End Type="EventosModel.TipoEvento" Role="TipoEvento" Multiplicity="0..1" />
+          <End Type="EventosModel.Evento" Role="Evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoEvento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Evento">
+              <PropertyRef Name="idTipoEvento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participante_Evento">
+          <End Type="EventosModel.Evento" Role="Evento" Multiplicity="0..1" />
+          <End Type="EventosModel.Participante" Role="Participante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Participante">
+              <PropertyRef Name="idEvento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Publicacao_Evento">
+          <End Type="EventosModel.Evento" Role="Evento" Multiplicity="0..1" />
+          <End Type="EventosModel.Publicacao" Role="Publicacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Publicacao">
+              <PropertyRef Name="idEvento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participante_GrauAcademico">
+          <End Type="EventosModel.GrauAcademico" Role="GrauAcademico" Multiplicity="0..1" />
+          <End Type="EventosModel.Participante" Role="Participante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrauAcademico">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Participante">
+              <PropertyRef Name="idGrau" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participante_Sexo">
+          <End Type="EventosModel.Sexo" Role="Sexo" Multiplicity="0..1" />
+          <End Type="EventosModel.Participante" Role="Participante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sexo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Participante">
+              <PropertyRef Name="sexo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participante_TipoParticipante">
+          <End Type="EventosModel.TipoParticipante" Role="TipoParticipante" Multiplicity="0..1" />
+          <End Type="EventosModel.Participante" Role="Participante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoParticipante">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Participante">
+              <PropertyRef Name="idTipoParticipante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EventosModelStoreContainer" CdmEntityContainer="EventosEntities">
+          <EntitySetMapping Name="Participantes">
+            <EntityTypeMapping TypeName="EventosModel.Participante">
+              <MappingFragment StoreEntitySet="Participante">
+                <ScalarProperty Name="idEvento" ColumnName="idEvento" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idTipoParticipante" ColumnName="idTipoParticipante" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="apelido" ColumnName="apelido" />
+                <ScalarProperty Name="idGrau" ColumnName="idGrau" />
+                <ScalarProperty Name="empresa" ColumnName="empresa" />
+                <ScalarProperty Name="dataNascimento" ColumnName="dataNascimento" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estadoes">
+            <EntityTypeMapping TypeName="EventosModel.Estado">
+              <MappingFragment StoreEntitySet="Estado">
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Eventoes">
+            <EntityTypeMapping TypeName="EventosModel.Evento">
+              <MappingFragment StoreEntitySet="Evento">
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="agenda" ColumnName="agenda" />
+                <ScalarProperty Name="local" ColumnName="local" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="idTipoEvento" ColumnName="idTipoEvento" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GrauAcademicoes">
+            <EntityTypeMapping TypeName="EventosModel.GrauAcademico">
+              <MappingFragment StoreEntitySet="GrauAcademico">
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Publicacaos">
+            <EntityTypeMapping TypeName="EventosModel.Publicacao">
+              <MappingFragment StoreEntitySet="Publicacao">
+                <ScalarProperty Name="idEvento" ColumnName="idEvento" />
+                <ScalarProperty Name="dataPublicacao" ColumnName="dataPublicacao" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sexoes">
+            <EntityTypeMapping TypeName="EventosModel.Sexo">
+              <MappingFragment StoreEntitySet="Sexo">
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoEventoes">
+            <EntityTypeMapping TypeName="EventosModel.TipoEvento">
+              <MappingFragment StoreEntitySet="TipoEvento">
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoParticipantes">
+            <EntityTypeMapping TypeName="EventosModel.TipoParticipante">
+              <MappingFragment StoreEntitySet="TipoParticipante">
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

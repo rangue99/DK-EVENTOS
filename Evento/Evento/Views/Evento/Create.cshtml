@@ -1,0 +1,73 @@
+﻿@model Evento.Evento
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Novo</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Evento</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.titulo, "Titulo")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.titulo)
+            @Html.ValidationMessageFor(model => model.titulo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.idTipoEvento, "Tipo de Evento")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("idTipoEvento", String.Empty)
+            @Html.ValidationMessageFor(model => model.idTipoEvento)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.descricao, "Descricao")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.descricao)
+            @Html.ValidationMessageFor(model => model.descricao)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.local, "Local")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.local)
+            @Html.ValidationMessageFor(model => model.local)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.agenda, "Agenda")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.agenda)
+            @Html.ValidationMessageFor(model => model.agenda)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.idEstado, "Estado")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("idEstado", String.Empty)
+            @Html.ValidationMessageFor(model => model.idEstado)
+        </div>
+
+        <p>
+            <input type="submit" value="Salvar" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Voltar", "Index")
+</div>

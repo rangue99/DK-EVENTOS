@@ -1,0 +1,45 @@
+﻿@model Evento.Evento
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Visualiza&ccedil;&atilde;o</h2>
+
+<fieldset>
+    <legend>Evento</legend>
+
+    <div class="display-label"><b>Titulo</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.titulo)
+    </div>
+
+    <div class="display-label"><b>Tipo de Evento</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TipoEvento.descricao)
+    </div>
+
+    <div class="display-label"><b>Descricao</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.descricao)
+    </div>
+
+    <div class="display-label"><b>Local</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.local)
+    </div>
+
+    <div class="display-label"><b>Agenda</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.agenda)
+    </div>
+
+    <div class="display-label"><b>Estado</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Estado.descricao)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id=Model.id }) |
+    @Html.ActionLink("Voltar", "Index")
+</p>

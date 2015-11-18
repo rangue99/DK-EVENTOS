@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Evento.Publicacao>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Eventos Publicados</h2>
+
+<p>
+    @Html.ActionLink("Publicar Novo Evento", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            Data de Publica&ccedil;&atilde;o
+        </th>
+        <th>
+            Evento
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.dataPublicacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Evento.titulo)
+        </td>
+        <td>
+            @Html.ActionLink("Remarcar Evento", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Visualizar", "Details", new { id=item.id }) |
+            @Html.ActionLink("Cancelar", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Evento.Participante>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Participantes</h2>
+
+<p>
+    @Html.ActionLink("Novo", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            Participante
+        </th>
+        <th>
+            Nome
+        </th>
+        <th>
+            Apelido
+        </th>
+        <th>
+            Grau Academico
+        </th>
+        <th>
+            Empresa
+        </th>
+        <th>
+           Data de Nascimento
+        </th>
+        <th>
+            Sexo
+        </th>
+        <th>
+            Telefone
+        </th>
+        <th>
+            E-Mail
+        </th>
+        <th>
+            Evento
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoParticipante.descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.apelido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GrauAcademico.descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.empresa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dataNascimento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sexo1.descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Evento.titulo)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Visualizar", "Details", new { id=item.id }) |
+            @Html.ActionLink("Apagar", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

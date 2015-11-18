@@ -1,0 +1,65 @@
+﻿@model Evento.Participante
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Visualiza&ccedil;&atilde;o</h2>
+
+<fieldset>
+    <legend>Participante</legend>
+
+    <div class="display-label"><b>Tipo de Participante</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TipoParticipante.descricao)
+    </div>
+
+    <div class="display-label"><b>Nome</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.nome)
+    </div>
+
+    <div class="display-label"><b>Apelido</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.apelido)
+    </div>
+
+    <div class="display-label"><b>Grau Academico</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GrauAcademico.descricao)
+    </div>
+
+    <div class="display-label"><b>Empresa</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.empresa)
+    </div>
+
+    <div class="display-label"><b>Data Nascimento</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.dataNascimento)
+    </div>
+
+    <div class="display-label"><b>Sexo</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Sexo1.descricao)
+    </div>
+
+    <div class="display-label"><b>Telefone</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.tel)
+    </div>
+
+    <div class="display-label"><b>E-mail</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.email)
+    </div>
+
+    <div class="display-label">Evento</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Evento.titulo)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id=Model.id }) |
+    @Html.ActionLink("Listagem", "Index")
+</p>

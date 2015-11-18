@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6da4255932364ca687b2462d0e883548" Name="Diagram1">
+        <EntityTypeShape EntityType="EventosModel.Participante" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventosModel.Estado" Width="1.5" PointX="2.025938765157917" PointY="20.379379430962437" />
+        <EntityTypeShape EntityType="EventosModel.Evento" Width="1.5" PointX="5.06967920859795" PointY="14.437344229983792" />
+        <EntityTypeShape EntityType="EventosModel.GrauAcademico" Width="1.5" PointX="7.0341273262324409" PointY="25.590345051880156" />
+        <EntityTypeShape EntityType="EventosModel.Publicacao" Width="1.5" PointX="7.7853755204870252" PointY="30.661146491142524" />
+        <EntityTypeShape EntityType="EventosModel.Sexo" Width="1.5" PointX="10.908638638867362" PointY="17.710190274617723" />
+        <EntityTypeShape EntityType="EventosModel.TipoEvento" Width="1.5" PointX="5.6562855735683275" PointY="8.66188988492912" />
+        <EntityTypeShape EntityType="EventosModel.TipoParticipante" Width="1.5" PointX="10.355360252016858" PointY="18.604709633907632" />
+        <AssociationConnector Association="EventosModel.FK_Evento_Estado" />
+        <AssociationConnector Association="EventosModel.FK_Evento_TipoEvento" />
+        <AssociationConnector Association="EventosModel.FK_Participante_Evento" />
+        <AssociationConnector Association="EventosModel.FK_Publicacao_Evento" />
+        <AssociationConnector Association="EventosModel.FK_Participante_GrauAcademico" />
+        <AssociationConnector Association="EventosModel.FK_Participante_Sexo" />
+        <AssociationConnector Association="EventosModel.FK_Participante_TipoParticipante" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

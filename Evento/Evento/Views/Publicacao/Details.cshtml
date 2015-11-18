@@ -1,0 +1,25 @@
+﻿@model Evento.Publicacao
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Visualiza&ccedil;&atilde;o</h2>
+
+<fieldset>
+    <legend>Publicacao</legend>
+
+    <div class="display-label"><b>Data de Publicacao</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.dataPublicacao)
+    </div>
+
+    <div class="display-label"><b>Evento</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Evento.titulo)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Remarcar", "Edit", new { id=Model.id }) |
+    @Html.ActionLink("Voltar", "Index")
+</p>

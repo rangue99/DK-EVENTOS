@@ -1,0 +1,48 @@
+﻿@model Evento.Evento
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Apagar</h2>
+
+<h3 style="color:red">Deseja apagar isto?</h3>
+<fieldset>
+    <legend>Evento</legend>
+
+    <div class="display-label"><b>Titulo</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.titulo)
+    </div>
+
+    <div class="display-label"><b>Tipo de Evento</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TipoEvento.descricao)
+    </div>
+
+    <div class="display-label"><b>Descricao</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.descricao)
+    </div>
+
+    <div class="display-label"><b>Local</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.local)
+    </div>
+
+    <div class="display-label"><b>Agenda</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.agenda)
+    </div>
+
+    <div class="display-label"><b>Estado</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Estado.descricao)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Volatar", "Index")
+    </p>
+}

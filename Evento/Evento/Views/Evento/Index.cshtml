@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Evento.Evento>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Eventos</h2>
+
+<p>
+    @Html.ActionLink("Novo", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            Titulo
+        </th>
+        <th>
+            Tipo de Evento
+        </th>
+        <th>
+            Descricao
+        </th>
+        <th>
+            Local
+        </th>
+        <th>
+            Agenda
+        </th>
+        <th>
+            Estado
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoEvento.descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.local)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.agenda)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estado.descricao)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Visualizar", "Details", new { id=item.id }) |
+            @Html.ActionLink("Apagar", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>
